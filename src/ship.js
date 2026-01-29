@@ -1,6 +1,6 @@
 class Ship {
   constructor(len) {
-    len = this.len;
+    this.len = len;
     this.hits = 0;
     this.sunk = false;
   }
@@ -15,3 +15,5 @@ class Ship {
     }
   }
 }
+
+export { Ship };
