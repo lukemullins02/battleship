@@ -1,6 +1,9 @@
+import { Ship } from "./ship";
+
 class Gameboard {
   constructor() {
     this.arr = new Array(10).fill(null).map(() => new Array(10).fill(0));
+    this.shipObjs = [];
   }
 
   placeShips() {
@@ -43,12 +46,15 @@ class Gameboard {
         }
 
         if (!check) {
+          const obj = { ship: new Ship(curShip), cords: [] };
           checkX = x;
           for (let i = 0; i < curShip; i++) {
             this.arr[checkX][y] = 1;
             fill[checkX][y] = true;
+            obj.cords.push([checkX, y]);
             checkX--;
           }
+          this.shipObjs.push(obj);
           ships.shift();
         }
       }
@@ -76,11 +82,14 @@ class Gameboard {
 
         if (!check) {
           checkY = y;
+          const obj = { ship: new Ship(curShip), cords: [] };
           for (let i = 0; i < curShip; i++) {
             this.arr[x][checkY] = 1;
             fill[x][checkY] = true;
+            obj.cords.push([x, checkY]);
             checkY--;
           }
+          this.shipObjs.push(obj);
           ships.shift();
         }
       }

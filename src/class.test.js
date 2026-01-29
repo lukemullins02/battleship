@@ -46,8 +46,6 @@ test("Check if randomly placed", () => {
 
   game.placeShips();
 
-  game.printBoard();
-
   for (let i = 0; i < game.arr.length; i++) {
     for (let j = 0; j < game.arr[i].length; j++) {
       if (game.arr[i][j] === 1) {
@@ -57,4 +55,13 @@ test("Check if randomly placed", () => {
   }
 
   expect(count).toBe(17);
+});
+
+test("If shipObjs proper length", () => {
+  const game = new Gameboard();
+  game.placeShips();
+
+  console.log(game.shipObjs);
+
+  expect(game.shipObjs.length).toBe(5);
 });
