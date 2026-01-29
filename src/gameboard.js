@@ -15,8 +15,6 @@ class Gameboard {
       const y = Math.floor(Math.random() * 10);
       const verOrNot = Math.floor(Math.random() * 2);
 
-      console.log(verOrNot);
-
       if (verOrNot === 0) {
         this.checkVertical(x, y, fill, ships);
       } else {

@@ -61,7 +61,5 @@ test("If shipObjs proper length", () => {
   const game = new Gameboard();
   game.placeShips();
 
-  console.log(game.shipObjs);
-
   expect(game.shipObjs.length).toBe(5);
 });
