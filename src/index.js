@@ -5,36 +5,54 @@ import dom from "./DOM.js";
 
 const container = document.querySelector(".container");
 
+dom.startGame();
 let player = new Player();
-let cpu = new Player();
-
 player.board.placeShips();
-cpu.board.placeShips();
-
 dom.renderBoard(player.board.arr, "player");
 
-dom.renderBoard(cpu.board.arr, "cpu");
+let cpu;
+
+container.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("start-btn")) return;
+
+  dom.removeDOM();
+
+  cpu = new Player();
+
+  cpu.board.placeShips();
+
+  dom.renderBoard(player.board.arr, "player");
+
+  dom.renderBoard(cpu.board.arr, "cpu");
+  dom.showPlayer("Player's Turn");
+});
+
+container.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("random-btn")) return;
+
+  player = new Player();
+
+  player.board.placeShips();
+
+  dom.removeDOM();
+
+  dom.startGame();
+
+  dom.renderBoard(player.board.arr, "player");
+});
 
 let curPlayer = true;
-
-dom.showPlayer("Player's Turn");
 
 container.addEventListener("click", (e) => {
   if (!e.target.classList.contains("play-again-btn")) return;
 
   dom.removeDOM();
 
+  dom.startGame();
+
   player = new Player();
-  cpu = new Player();
-
   player.board.placeShips();
-  cpu.board.placeShips();
-
   dom.renderBoard(player.board.arr, "player");
-
-  dom.renderBoard(cpu.board.arr, "cpu");
-
-  dom.showPlayer("Player's Turn");
 
   curPlayer = true;
 });

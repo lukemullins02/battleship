@@ -1,3 +1,25 @@
+function startGame() {
+  const container = document.querySelector(".container");
+  const start = document.createElement("p");
+  const btn = document.createElement("button");
+  const randomBtn = document.createElement("button");
+  const div = document.createElement("div");
+
+  btn.classList.add("start-btn");
+  randomBtn.classList.add("random-btn");
+  div.classList.add("start");
+
+  btn.textContent = "Begin Engagement";
+  start.textContent = "BATTLESHIP";
+  randomBtn.textContent = "Randomize Fleet";
+
+  div.append(start);
+  div.append(btn);
+  div.append(randomBtn);
+
+  container.append(div);
+}
+
 function renderBoard(arr, str) {
   const container = document.querySelector(".container");
   const half = document.createElement("div");
@@ -62,11 +84,11 @@ function playAgain() {
   btn.classList.add("play-again-btn");
 
   play.textContent = "Play Again";
-  btn.textContent = "click";
+  btn.textContent = "Redeploy";
 
   div.appendChild(play);
   div.appendChild(btn);
   container.appendChild(div);
 }
 
-export default { renderBoard, showPlayer, removeDOM, playAgain };
+export default { renderBoard, showPlayer, removeDOM, playAgain, startGame };
