@@ -96,18 +96,24 @@ class Gameboard {
   }
 
   receiveAttack(arr) {
+    let hit = false;
+
     if (this.marked[arr[0]][arr[1]]) {
       console.log("Cord already marked. Try again");
+      return;
     } else {
       this.marked[arr[0]][arr[1]] = true;
       this.shipObjs.forEach((item) => {
         for (let i = 0; i < item.cords.length; i++) {
           if (item.cords[i][0] === arr[0] && item.cords[i][1] === arr[1]) {
             item.ship.hit();
+            hit = true;
           }
         }
       });
     }
+
+    return hit;
   }
 
   checkSunk() {
