@@ -13,6 +13,11 @@ function renderBoard(arr, str) {
       const cell = document.createElement("div");
       cell.dataset.x = i;
       cell.dataset.y = j;
+
+      if (arr[i][j] === 1) {
+        cell.textContent = "Hi!";
+      }
+
       cell.classList = `cell-${str}`;
       row.appendChild(cell);
     }
@@ -36,4 +41,32 @@ function showPlayer(str) {
   }
 }
 
-export default { renderBoard, showPlayer };
+function removeDOM() {
+  const container = document.querySelector(".container");
+  let child = container.lastElementChild;
+
+  while (child) {
+    container.removeChild(child);
+    child = container.lastElementChild;
+  }
+}
+
+function playAgain() {
+  const container = document.querySelector(".container");
+  const play = document.createElement("p");
+  const btn = document.createElement("button");
+  const div = document.createElement("div");
+
+  div.classList.add("play-again");
+
+  btn.classList.add("play-again-btn");
+
+  play.textContent = "Play Again";
+  btn.textContent = "click";
+
+  div.appendChild(play);
+  div.appendChild(btn);
+  container.appendChild(div);
+}
+
+export default { renderBoard, showPlayer, removeDOM, playAgain };
