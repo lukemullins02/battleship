@@ -12,13 +12,15 @@ h1 {
   display: flex;
 }
 
-.cell {
+.cell-player,
+.cell-cpu {
   border: 1px solid black;
   width: 50px;
   height: 50px;
   background-color: aqua;
 }
 
-.cell:hover {
+.cell-player:hover,
+.cell-cpu:hover {
   background-color: rgb(6, 163, 163);
 }
