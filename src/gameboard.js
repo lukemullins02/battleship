@@ -4,6 +4,7 @@ class Gameboard {
   constructor() {
     this.arr = new Array(10).fill(null).map(() => new Array(10).fill(0));
     this.shipObjs = [];
+    this.marked = new Array(10).fill(null).map(() => new Array(10).fill(false));
   }
 
   placeShips() {
@@ -92,6 +93,39 @@ class Gameboard {
         }
       }
     }
+  }
+
+  receiveAttack(arr) {
+    if (this.marked[arr[0]][arr[1]]) {
+      console.log("Cord already marked. Try again");
+    } else {
+      this.marked[arr[0]][arr[1]] = true;
+      this.shipObjs.forEach((item) => {
+        for (let i = 0; i < item.cords.length; i++) {
+          if (item.cords[i][0] === arr[0] && item.cords[i][1] === arr[1]) {
+            item.ship.hit();
+          }
+        }
+      });
+    }
+  }
+
+  checkSunk() {
+    let count = 0;
+
+    this.shipObjs.forEach((item) => {
+      item.ship.isSunk();
+      if (item.ship.sunk) {
+        count++;
+      }
+    });
+
+    if (count === this.shipObjs.length) {
+      console.log("Game Over!");
+      return true;
+    }
+
+    return false;
   }
 
   printBoard() {

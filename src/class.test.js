@@ -63,3 +63,16 @@ test("If shipObjs proper length", () => {
 
   expect(game.shipObjs.length).toBe(5);
 });
+
+test("If recieveAttack and checkSunk", () => {
+  const game = new Gameboard();
+  game.placeShips();
+
+  for (let i = 0; i < game.arr.length; i++) {
+    for (let j = 0; j < game.arr[i].length; j++) {
+      game.receiveAttack([i, j]);
+    }
+  }
+
+  expect(game.checkSunk()).toBeTruthy();
+});
