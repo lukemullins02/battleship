@@ -1,19 +1,29 @@
+function title() {
+  const container = document.querySelector(".container");
+  const title = document.createElement("p");
+  title.classList.add("title");
+
+  title.textContent = "BATTLESHIP";
+
+  container.append(title);
+}
+
 function startGame() {
   const container = document.querySelector(".container");
-  const start = document.createElement("p");
   const btn = document.createElement("button");
   const randomBtn = document.createElement("button");
   const div = document.createElement("div");
+
+  container.classList.add("intro");
 
   btn.classList.add("start-btn");
   randomBtn.classList.add("random-btn");
   div.classList.add("start");
 
   btn.textContent = "Begin Engagement";
-  start.textContent = "BATTLESHIP";
+
   randomBtn.textContent = "Randomize Fleet";
 
-  div.append(start);
   div.append(btn);
   div.append(randomBtn);
 
@@ -22,7 +32,12 @@ function startGame() {
 
 function renderBoard(arr, str) {
   const container = document.querySelector(".container");
+
+  container.classList.remove("intro");
+  container.classList.remove("end");
+
   const half = document.createElement("div");
+
   const show = document.createElement("p");
 
   show.classList.add("show");
@@ -36,11 +51,14 @@ function renderBoard(arr, str) {
       cell.dataset.x = i;
       cell.dataset.y = j;
 
-      if (arr[i][j] === 1) {
-        cell.textContent = "Hi!";
+      if (arr[i][j] === 1 && str === "player") {
+        cell.textContent = "X";
+        cell.classList.add("ship");
       }
 
-      cell.classList = `cell-${str}`;
+      const className = `cell-${str}`;
+
+      cell.classList.add(className);
       row.appendChild(cell);
     }
     half.appendChild(row);
@@ -74,21 +92,27 @@ function removeDOM() {
 }
 
 function playAgain() {
-  const container = document.querySelector(".container");
-  const play = document.createElement("p");
+  const body = document.querySelector("body");
   const btn = document.createElement("button");
   const div = document.createElement("div");
+
+  body.classList.add("end");
 
   div.classList.add("play-again");
 
   btn.classList.add("play-again-btn");
 
-  play.textContent = "Play Again";
-  btn.textContent = "Redeploy";
+  btn.textContent = "Redploy";
 
-  div.appendChild(play);
   div.appendChild(btn);
-  container.appendChild(div);
+  body.appendChild(div);
 }
 
-export default { renderBoard, showPlayer, removeDOM, playAgain, startGame };
+export default {
+  renderBoard,
+  showPlayer,
+  removeDOM,
+  playAgain,
+  startGame,
+  title,
+};

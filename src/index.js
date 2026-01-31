@@ -4,11 +4,13 @@ import { Player } from "./player.js";
 import dom from "./DOM.js";
 
 const container = document.querySelector(".container");
+const body = document.querySelector("body");
 
-dom.startGame();
+dom.title();
 let player = new Player();
 player.board.placeShips();
 dom.renderBoard(player.board.arr, "player");
+dom.startGame();
 
 let cpu;
 
@@ -36,23 +38,31 @@ container.addEventListener("click", (e) => {
 
   dom.removeDOM();
 
-  dom.startGame();
+  dom.title();
 
   dom.renderBoard(player.board.arr, "player");
+
+  dom.startGame();
 });
 
 let curPlayer = true;
 
-container.addEventListener("click", (e) => {
+body.addEventListener("click", (e) => {
   if (!e.target.classList.contains("play-again-btn")) return;
+
+  const div = document.querySelector(".play-again");
+  const show = document.querySelector(".show");
+
+  div.remove();
+  show.remove();
 
   dom.removeDOM();
 
-  dom.startGame();
+  dom.title();
 
-  player = new Player();
-  player.board.placeShips();
   dom.renderBoard(player.board.arr, "player");
+
+  dom.startGame();
 
   curPlayer = true;
 });
@@ -75,15 +85,15 @@ container.addEventListener("click", (e) => {
     ]) === true
   ) {
     e.target.textContent = "X";
+    e.target.classList.add("hit");
 
     if (cpu.board.checkSunk()) {
-      dom.showPlayer("Game Over!");
-      dom.removeDOM();
+      dom.showPlayer("Game Over! You won.");
       dom.playAgain();
       return;
     }
   } else {
-    e.target.textContent = "O";
+    e.target.textContent = "X";
   }
 
   dom.showPlayer("CPU's Turn");
@@ -104,15 +114,15 @@ container.addEventListener("click", (e) => {
 
         if (check === true) {
           cell.textContent = "X";
+          cell.classList.add("hit");
 
           if (player.board.checkSunk()) {
-            dom.showPlayer("Game Over!");
-            dom.removeDOM();
+            dom.showPlayer("Game Over! You lost.");
             dom.playAgain();
             return;
           }
         } else {
-          cell.textContent = "O";
+          cell.textContent = "X";
         }
 
         marked = false;
@@ -120,5 +130,5 @@ container.addEventListener("click", (e) => {
     }
     curPlayer = true;
     dom.showPlayer("Player's Turn");
-  }, 500);
+  }, 700);
 });
